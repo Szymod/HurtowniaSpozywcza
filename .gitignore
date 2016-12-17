@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/DataAccess/bin
+/DataAccess/obj
+/Interfaces/bin
+/Interfaces/obj
+*.user
+/Model/bin
+/Model/obj
+/packages
+/WebClient/bin
+/WebClient/obj/Debug
+*.suo
