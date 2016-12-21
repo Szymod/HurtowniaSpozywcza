@@ -1,0 +1,82 @@
+﻿@model Model.DomainModel.Zamowienie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Zamowienie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Faktura.NumerFaktury)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Faktura.NumerFaktury)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Klient.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Klient.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataZlozeniaZamowienia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataZlozeniaZamowienia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CzyPrzyjetoZamowienie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CzyPrzyjetoZamowienie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataPrzyjeciaZamowienia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataPrzyjeciaZamowienia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zaplacono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zaplacono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CzyZrealizowanoZamowienie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CzyZrealizowanoZamowienie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataRealizacjiZamowienia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataRealizacjiZamowienia)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

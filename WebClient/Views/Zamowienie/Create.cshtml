@@ -1,0 +1,118 @@
+﻿@using WebClient.Models
+@model ZamowienieViewModel
+
+@{
+    ViewBag.Title = "Zamówienie";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Zamowienie</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.KlientId, "KlientId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("KlientId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.KlientId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataZlozeniaZamowienia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DataZlozeniaZamowienia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DataZlozeniaZamowienia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CzyPrzyjetoZamowienie, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CzyPrzyjetoZamowienie)
+                    @Html.ValidationMessageFor(model => model.CzyPrzyjetoZamowienie, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataPrzyjeciaZamowienia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DataPrzyjeciaZamowienia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DataPrzyjeciaZamowienia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Zaplacono, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Zaplacono)
+                    @Html.ValidationMessageFor(model => model.Zaplacono, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CzyZrealizowanoZamowienie, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CzyZrealizowanoZamowienie)
+                    @Html.ValidationMessageFor(model => model.CzyZrealizowanoZamowienie, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataRealizacjiZamowienia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DataRealizacjiZamowienia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DataRealizacjiZamowienia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <table class="table">
+                <caption>Pozycje zamówienia</caption>
+                <thead>
+                    <tr>
+                        <th>@Html.Label("Nazwa produktu")</th>
+                        <th>@Html.Label("Ilość")</th>
+                        <th>@Html.Label("Cena")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pozycja in Model.Pozycje)
+                    {
+                        <tr>
+                            <td style="display: none;">@pozycja.Id</td>
+                            <td style="display: none;">@pozycja.TowarId</td>
+                            <td style="display: none;">@pozycja.ZamowienieId</td>
+                            <td>@pozycja.TowarNazwa</td>
+                            <td>@pozycja.Ilosc</td>
+                            <td>@pozycja.TowarCena</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Utwórz" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Powrót do listy", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Model.DomainModel.Zamowienie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Faktura.NumerFaktury)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Klient.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataZlozeniaZamowienia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CzyPrzyjetoZamowienie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataPrzyjeciaZamowienia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zaplacono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CzyZrealizowanoZamowienie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataRealizacjiZamowienia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Faktura.NumerFaktury)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Klient.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataZlozeniaZamowienia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CzyPrzyjetoZamowienie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataPrzyjeciaZamowienia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zaplacono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CzyZrealizowanoZamowienie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataRealizacjiZamowienia)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
