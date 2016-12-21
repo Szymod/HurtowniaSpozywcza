@@ -141,12 +141,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\DostawcaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KlientController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdresViewModel.cs" />
+    <Compile Include="Models\DostawcaViewModel.cs" />
     <Compile Include="Models\KlientViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -201,6 +203,11 @@
     <Content Include="Views\Klient\Edit.cshtml" />
     <Content Include="Views\Klient\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AdresViewModel.cshtml" />
+    <Content Include="Views\Dostawca\Create.cshtml" />
+    <Content Include="Views\Dostawca\Delete.cshtml" />
+    <Content Include="Views\Dostawca\Details.cshtml" />
+    <Content Include="Views\Dostawca\Edit.cshtml" />
+    <Content Include="Views\Dostawca\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
