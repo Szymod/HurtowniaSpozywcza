@@ -13,3 +13,4 @@
 /WebClient/bin
 /WebClient/obj/Debug
 *.suo
+/.vs
