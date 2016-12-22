@@ -70,7 +70,7 @@
             @Html.ActionLink("Szczegóły", "Details", new { id=item.Id }) |
             @Html.ActionLink("Usuń", "Delete", new { id=item.Id }) |
 
-            @if (string.IsNullOrEmpty(item.NumerFaktury))
+            @if (!string.IsNullOrEmpty(item.NumerFaktury))
             {
                  @Html.ActionLink("Pobierz fakture", "Pobierz", "Faktura", new { id=item.Id })
             }
