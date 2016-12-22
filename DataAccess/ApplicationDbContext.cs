@@ -27,12 +27,10 @@ namespace DataAccess
         public DbSet<Dostawca> Dostawcy { get; set; }
         public DbSet<FakturaSprzedazy> FakturySprzedazy { get; set; }
         public DbSet<FakturaSprzedazyPozycja> FakturySprzedazyPozycje { get; set; }
-        public DbSet<Kategoria> Kategorie { get; set; }
         public DbSet<Klient> Klienci { get; set; }
         public DbSet<KodPocztowy> KodyPocztowe { get; set; }
         public DbSet<Miasto> Miasta { get; set; }
         public DbSet<Towar> Towary { get; set; }
-        public DbSet<TowarHistoria> TowaryHistoria { get; set; }
         public DbSet<Ulica> Ulice { get; set; }
         public DbSet<Uzytkownik> Uzytkownicy { get; set; }
         public DbSet<UzytkownikUprawnienie> UzytkownicyUprawnienia { get; set; }
@@ -45,12 +43,10 @@ namespace DataAccess
             modelBuilder.Configurations.Add(new DostawcaMapping());
             modelBuilder.Configurations.Add(new FakturaSprzedazyMapping());
             modelBuilder.Configurations.Add(new FakturaSprzedazyPozycjaMapping());
-            modelBuilder.Configurations.Add(new KategoriaMapping());
             modelBuilder.Configurations.Add(new KlientMapping());
             modelBuilder.Configurations.Add(new KodPocztowyMapping());
             modelBuilder.Configurations.Add(new MiastoMapping());
             modelBuilder.Configurations.Add(new TowarMapping());
-            modelBuilder.Configurations.Add(new TowarHistoriaMapping());
             modelBuilder.Configurations.Add(new UlicaMapping());
             modelBuilder.Configurations.Add(new UzytkownikMapping());
             modelBuilder.Configurations.Add(new UzytkownikUprawnienieMapping());

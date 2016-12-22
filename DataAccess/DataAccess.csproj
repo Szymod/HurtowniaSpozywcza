@@ -61,11 +61,9 @@
     <Compile Include="Mapping\DostawcaMapping.cs" />
     <Compile Include="Mapping\FakturaSprzedazyPozycjaMapping.cs" />
     <Compile Include="Mapping\FakturaSprzedazyMapping.cs" />
-    <Compile Include="Mapping\KategoriaMapping.cs" />
     <Compile Include="Mapping\KlientMapping.cs" />
     <Compile Include="Mapping\KodPocztowyMapping.cs" />
     <Compile Include="Mapping\MiastoMapping.cs" />
-    <Compile Include="Mapping\TowarHistoriaMapping.cs" />
     <Compile Include="Mapping\TowarMapping.cs" />
     <Compile Include="Mapping\UlicaMapping.cs" />
     <Compile Include="Mapping\UzytkownikMapping.cs" />

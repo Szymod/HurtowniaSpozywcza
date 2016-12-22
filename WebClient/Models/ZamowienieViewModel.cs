@@ -45,4 +45,28 @@ namespace WebClient.Models
         [DisplayName("Ilość")]
         public int Ilosc { get; set; }
     }
+
+    public class ZamowienieListaViewModel
+    {
+        public int Id { get; set; }
+
+        [DisplayName("Klient")]
+        public string Klient { get; set; }
+
+        [DisplayName("Numer faktury")]
+        public string NumerFaktury { get; set; }
+
+        [DisplayName("Data zgłoszenia zamówienia")]
+        public DateTime DataZlozeniaZamowienia { get; set; }
+        [DisplayName("Czy zamówienie przyjęto?")]
+        public bool CzyPrzyjetoZamowienie { get; set; }
+        [DisplayName("Data przyjęcia zamówienia")]
+        public DateTime? DataPrzyjeciaZamowienia { get; set; }
+        [DisplayName("Czy klient zapłacił?")]
+        public bool Zaplacono { get; set; }
+        [DisplayName("Czy zamówienie zrealizowano?")]
+        public bool CzyZrealizowanoZamowienie { get; set; }
+        [DisplayName("Data zrealizowania zamówienia")]
+        public DateTime? DataRealizacjiZamowienia { get; set; }
+    }
 }

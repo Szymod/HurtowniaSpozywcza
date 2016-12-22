@@ -21,7 +21,21 @@ namespace WebClient.Controllers
         public async Task<ActionResult> Index()
         {
             var zamowienia = db.Zamowienia.Include(z => z.Faktura).Include(z => z.Klient);
-            return View(await zamowienia.ToListAsync());
+
+            var model = zamowienia.Select(x => new ZamowienieListaViewModel()
+            {
+                Id = x.Id,
+                Klient = x.Klient.Nazwa,
+                NumerFaktury = x.Faktura != null ? x.Faktura.NumerFaktury : "",
+                DataZlozeniaZamowienia = x.DataZlozeniaZamowienia,
+                CzyPrzyjetoZamowienie = x.CzyPrzyjetoZamowienie,
+                DataPrzyjeciaZamowienia = x.DataPrzyjeciaZamowienia,
+                Zaplacono = x.Zaplacono,
+                CzyZrealizowanoZamowienie = x.CzyZrealizowanoZamowienie,
+                DataRealizacjiZamowienia = x.DataRealizacjiZamowienia,
+            });
+
+            return View(await model.ToListAsync());
         }
 
         // GET: Zamowienie/Details/5

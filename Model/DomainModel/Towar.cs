@@ -11,7 +11,6 @@ namespace Model.DomainModel
         public Towar()
         {
             PozycjeNaZamowieniach = new List<ZamowieniePozycja>();
-            CenaHistoria = new List<TowarHistoria>();
         }
 
         public int Id { get; set; }
@@ -20,16 +19,12 @@ namespace Model.DomainModel
         public int DostawcaId { get; set; }
         public Dostawca Dostawca { get; set; }
 
-        public int KategoriaId { get; set; }
-        public Kategoria Kategoria { get; set; }
-
         public decimal Cena { get; set; }
         public decimal Vat { get; set; }
 
         public int StanMagazynowy { get; set; }
         public bool Wycofany { get; set; }
 
-        public virtual ICollection<TowarHistoria> CenaHistoria { get; set; }
         public virtual ICollection<ZamowieniePozycja> PozycjeNaZamowieniach { get; set; }
     }
 }

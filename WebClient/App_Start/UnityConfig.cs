@@ -41,12 +41,10 @@ namespace WebClient.App_Start
             container.RegisterType<IBaseRepository<Dostawca>, BaseRepository<Dostawca>>();
             container.RegisterType<IBaseRepository<FakturaSprzedazy>, BaseRepository<FakturaSprzedazy>>();
             container.RegisterType<IBaseRepository<FakturaSprzedazyPozycja>, BaseRepository<FakturaSprzedazyPozycja>>();
-            container.RegisterType<IBaseRepository<Kategoria>, BaseRepository<Kategoria>>();
             container.RegisterType<IBaseRepository<Klient>, BaseRepository<Klient>>();
             container.RegisterType<IBaseRepository<KodPocztowy>, BaseRepository<KodPocztowy>>();
             container.RegisterType<IBaseRepository<Miasto>, BaseRepository<Miasto>>();
             container.RegisterType<IBaseRepository<Towar>, BaseRepository<Towar>>();
-            container.RegisterType<IBaseRepository<TowarHistoria>, BaseRepository<TowarHistoria>>();
             container.RegisterType<IBaseRepository<Ulica>, BaseRepository<Ulica>>();
             container.RegisterType<IBaseRepository<Uzytkownik>, BaseRepository<Uzytkownik>>();
             container.RegisterType<IBaseRepository<UzytkownikUprawnienie>, BaseRepository<UzytkownikUprawnienie>>();

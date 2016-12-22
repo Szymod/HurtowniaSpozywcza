@@ -50,8 +50,6 @@
     <Compile Include="DomainModel\KodPocztowy.cs" />
     <Compile Include="DomainModel\Miasto.cs" />
     <Compile Include="DomainModel\Towar.cs" />
-    <Compile Include="DomainModel\Kategoria.cs" />
-    <Compile Include="DomainModel\TowarHistoria.cs" />
     <Compile Include="DomainModel\Ulica.cs" />
     <Compile Include="DomainModel\Uzytkownik.cs" />
     <Compile Include="DomainModel\UzytkownikUprawnienie.cs" />

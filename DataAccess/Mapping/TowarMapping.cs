@@ -21,10 +21,8 @@ namespace DataAccess.Mapping
             Property(x => x.Vat).IsRequired();
 
             HasRequired(x => x.Dostawca).WithMany(x => x.Towary).HasForeignKey(x => x.DostawcaId);
-            HasRequired(x => x.Kategoria).WithMany(x => x.Towary).HasForeignKey(x => x.KategoriaId);
 
             HasMany(x => x.PozycjeNaZamowieniach).WithRequired(x => x.Towar).HasForeignKey(x => x.TowarId);
-            HasMany(x => x.CenaHistoria).WithRequired(x => x.Towar).HasForeignKey(x => x.TowarId);
         }
     }
 }

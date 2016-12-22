@@ -13,12 +13,10 @@ namespace Interfaces
         IBaseRepository<Dostawca> Dostawcy { get; }
         IBaseRepository<FakturaSprzedazy> FakturySprzedazy { get; }
         IBaseRepository<FakturaSprzedazyPozycja> FakturySprzedazyPozycje { get; }
-        IBaseRepository<Kategoria> Kategorie { get; }
         IBaseRepository<Klient> Klienci { get; }
         IBaseRepository<KodPocztowy> KodyPocztowe { get; }
         IBaseRepository<Miasto> Miasta { get; }
         IBaseRepository<Towar> Towary { get; }
-        IBaseRepository<TowarHistoria> TowaryHistoria { get; }
         IBaseRepository<Ulica> Ulice { get; }
         IBaseRepository<Uzytkownik> Uzytkownicy { get; }
         IBaseRepository<UzytkownikUprawnienie> UzytkownicyUprawnienia { get; }

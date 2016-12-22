@@ -144,6 +144,7 @@
     <Compile Include="Controllers\DostawcaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KlientController.cs" />
+    <Compile Include="Controllers\TowarController.cs" />
     <Compile Include="Controllers\ZamowienieController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -151,6 +152,7 @@
     <Compile Include="Models\AdresViewModel.cs" />
     <Compile Include="Models\DostawcaViewModel.cs" />
     <Compile Include="Models\KlientViewModel.cs" />
+    <Compile Include="Models\TowarViewModel.cs" />
     <Compile Include="Models\ZamowienieViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -196,8 +198,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Klient\Create.cshtml" />
     <Content Include="Views\Klient\Delete.cshtml" />
@@ -215,6 +215,8 @@
     <Content Include="Views\Zamowienie\Details.cshtml" />
     <Content Include="Views\Zamowienie\Edit.cshtml" />
     <Content Include="Views\Zamowienie\Index.cshtml" />
+    <Content Include="Views\Towar\Index.cshtml" />
+    <Content Include="Views\Towar\Create.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

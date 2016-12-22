@@ -33,9 +33,6 @@ namespace DataAccess
         public IBaseRepository<FakturaSprzedazyPozycja> FakturySprzedazyPozycje { get; set; }
 
         [Dependency]
-        public IBaseRepository<Kategoria> Kategorie { get; set; }
-
-        [Dependency]
         public IBaseRepository<Klient> Klienci { get; set; }
 
         [Dependency]
@@ -46,9 +43,6 @@ namespace DataAccess
 
         [Dependency]
         public IBaseRepository<Towar> Towary { get; set; }
-
-        [Dependency]
-        public IBaseRepository<TowarHistoria> TowaryHistoria { get; set; }
 
         [Dependency]
         public IBaseRepository<Ulica> Ulice { get; set; }
