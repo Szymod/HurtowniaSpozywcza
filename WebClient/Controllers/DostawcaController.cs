@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using DataAccess;
 using Model.DomainModel;
+using WebClient.Models;
 
 namespace WebClient.Controllers
 {
@@ -19,7 +20,13 @@ namespace WebClient.Controllers
         // GET: Dostawca
         public async Task<ActionResult> Index()
         {
-            var dostawcy = db.Dostawcy.Include(d => d.Adres);
+            var dostawcy = db.Dostawcy.Include(d => d.Adres).Select(d => new DostawcaListaViewModel()
+            {
+                Id = d.Id,
+                Nazwa = d.Nazwa,
+                Telefon = d.Telefon,
+                Adres = d.Adres == null ? "" : d.Adres.KodPocztowy.Kod + " " + d.Adres.Miasto.Nazwa + ", " + d.Adres.Ulica.Nazwa + " " + d.Adres.NumerDomu
+            });
             return View(await dostawcy.ToListAsync());
         }
 
@@ -50,11 +57,11 @@ namespace WebClient.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Nazwa,AdresId")] Dostawca dostawca)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Nazwa,AdresId")] DostawcaViewModel dostawca)
         {
             if (ModelState.IsValid)
             {
-                db.Dostawcy.Add(dostawca);
+                //db.Dostawcy.Add(dostawca);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

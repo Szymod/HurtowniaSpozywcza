@@ -20,7 +20,13 @@ namespace WebClient.Controllers
         // GET: Klient
         public async Task<ActionResult> Index()
         {
-            var klienci = db.Klienci.Include(k => k.Adres);
+            var klienci = db.Klienci.Include(k => k.Adres).Select(k=>new KlientListaViewModel()
+            {
+                Id = k.Id,
+                Nazwa = k.Nazwa,
+                Telefon = k.Telefon,
+                Adres = k.Adres == null ? "" : k.Adres.KodPocztowy.Kod + " " + k.Adres.Miasto.Nazwa + ", " + k.Adres.Ulica.Nazwa + " " + k.Adres.NumerDomu
+            });
             return View(await klienci.ToListAsync());
         }
 

@@ -17,4 +17,15 @@ namespace WebClient.Models
         [DisplayName("Adres")]
         public AdresViewModel Adres { get; set; }
     }
+
+    public class KlientListaViewModel
+    {
+        public int Id { get; set; }
+        [DisplayName("Nazwa klienta")]
+        public string Nazwa { get; set; }
+        [DisplayName("Telefon kontaktowy")]
+        public string Telefon { get; set; }
+        [DisplayName("Adres")]
+        public string Adres { get; set; }
+    }
 }

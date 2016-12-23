@@ -15,6 +15,7 @@ namespace Model.DomainModel
 
         public int Id { get; set; }
         public string Nazwa { get; set; }
+        public string Telefon { get; set; }
         public int AdresId { get; set; }
         public Adres Adres { get; set; }
 

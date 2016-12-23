@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Model.DomainModel.Klient>
+﻿@using WebClient.Models
+@model IEnumerable<KlientListaViewModel>
 
 @{
     ViewBag.Title = "Lista klientów";
@@ -27,6 +28,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefon)
         </td>
         <td>
             @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) |

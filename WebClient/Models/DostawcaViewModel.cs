@@ -17,4 +17,15 @@ namespace WebClient.Models
         [DisplayName("Adres")]
         public AdresViewModel Adres { get; set; }
     }
+
+    public class DostawcaListaViewModel
+    {
+        public int Id { get; set; }
+        [DisplayName("Nazwa dostawcy")]
+        public string Nazwa { get; set; }
+        [DisplayName("Telefon kontaktowy")]
+        public string Telefon { get; set; }
+        [DisplayName("Adres")]
+        public string Adres { get; set; }
+    }
 }

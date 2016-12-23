@@ -67,11 +67,11 @@ namespace WebClient.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,KlientId,DataZlozeniaZamowienia,CzyPrzyjetoZamowienie,DataPrzyjeciaZamowienia,Zaplacono,CzyZrealizowanoZamowienie,DataRealizacjiZamowienia")] Zamowienie zamowienie)
+        public async Task<ActionResult> Create([Bind(Include = "Id,KlientId,DataZlozeniaZamowienia,CzyPrzyjetoZamowienie,DataPrzyjeciaZamowienia,Zaplacono,CzyZrealizowanoZamowienie,DataRealizacjiZamowienia")] ZamowienieViewModel zamowienie)
         {
             if (ModelState.IsValid)
             {
-                db.Zamowienia.Add(zamowienie);
+                //db.Zamowienia.Add(zamowienie);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
