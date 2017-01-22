@@ -64,6 +64,11 @@ namespace DataAccess
             DbContext.SaveChanges();
         }
 
+        public async Task CommitAsync()
+        {
+            await DbContext.SaveChangesAsync();
+        }
+
         public bool HasChanges()
         {
             return DbContext.ChangeTracker.HasChanges();

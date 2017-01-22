@@ -17,7 +17,7 @@ namespace Model.DomainModel
         public string Nazwa { get; set; }
 
         public int DostawcaId { get; set; }
-        public Dostawca Dostawca { get; set; }
+        public virtual Dostawca Dostawca { get; set; }
 
         public decimal Cena { get; set; }
         public decimal Vat { get; set; }

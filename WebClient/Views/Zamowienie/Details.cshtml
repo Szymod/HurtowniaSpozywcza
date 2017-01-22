@@ -1,29 +1,40 @@
-﻿@model Model.DomainModel.Zamowienie
+﻿@using WebClient.Models
+@model ZamowienieViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
+
+<style>
+    .dl-horizontal dt {
+        width: 240px;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 260px;
+    }
+</style>
 
 <div>
     <h4>Zamowienie</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Faktura.NumerFaktury)
+            @Html.DisplayNameFor(model => model.NumerFaktury)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Faktura.NumerFaktury)
+            @Html.DisplayFor(model => model.NumerFaktury)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Klient.Nazwa)
+            @Html.DisplayNameFor(model => model.Klient)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Klient.Nazwa)
+            @Html.DisplayFor(model => model.Klient)
         </dd>
 
         <dt>
@@ -75,6 +86,47 @@
         </dd>
 
     </dl>
+
+    <table class="table">
+        <caption>Pozycje zamówienia</caption>
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Pozycje[0].TowarNazwa)</th>
+                <th>@Html.DisplayNameFor(model => model.Pozycje[0].Ilosc)</th>
+                <th>@Html.DisplayNameFor(model => model.Pozycje[0].TowarCena)</th>
+                <th>@Html.DisplayNameFor(model => model.Pozycje[0].TowarVat)</th>
+                <th>@Html.DisplayNameFor(model => model.Pozycje[0].Netto)</th>
+                <th>@Html.DisplayNameFor(model => model.Pozycje[0].Vat)</th>
+                <th>@Html.DisplayNameFor(model => model.Pozycje[0].Brutto)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pozycja in Model.Pozycje)
+            {
+                <tr>
+                    <td> @Html.DisplayFor(model => pozycja.TowarNazwa)</td>
+                    <td> @Html.DisplayFor(model => pozycja.Ilosc)</td>
+                    <td> @Html.DisplayFor(model => pozycja.TowarCena)</td>
+                    <td> @Html.DisplayFor(model => pozycja.TowarVat)</td>
+                    <td> @Html.DisplayFor(model => pozycja.Netto)</td>
+                    <td> @Html.DisplayFor(model => pozycja.Vat)</td>
+                    <td> @Html.DisplayFor(model => pozycja.Brutto)</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> <strong> Suma: </strong> </td>
+                <td> <strong> @Html.DisplayFor(model => model.SumaNetto) zł</strong> </td>
+                <td> <strong> @Html.DisplayFor(model => model.SumaVat) zł</strong> </td>
+                <td> <strong> @Html.DisplayFor(model => model.SumaBrutto) zł</strong> </td>
+            </tr>
+        </tfoot>
+    </table>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

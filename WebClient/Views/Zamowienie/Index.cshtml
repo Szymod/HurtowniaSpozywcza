@@ -66,17 +66,17 @@
             @Html.DisplayFor(modelItem => item.DataRealizacjiZamowienia)
         </td>
         <td>
-            @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Usuń", "Delete", new { id=item.Id }) |
-
             @if (!string.IsNullOrEmpty(item.NumerFaktury))
-            {
-                 @Html.ActionLink("Pobierz fakture", "Pobierz", "Faktura", new { id=item.Id })
+            {    
+                 @Html.ActionLink("Szczegóły", "Details", new { id=item.Id }) @:|
+                 @Html.ActionLink("Pobierz fakture", "Print", new { id = item.Id })
             }
             else
             {
-                @Html.ActionLink("Generuj fakture", "Pobierz", "Faktura", new { id = item.Id })
+                @Html.ActionLink("Generuj fakture", "GenerateInvoice", new { id = item.Id }) @:|
+                @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) @:|
+                @Html.ActionLink("Szczegóły", "Details", new { id=item.Id }) @:|
+                @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
             }
         </td>
     </tr>

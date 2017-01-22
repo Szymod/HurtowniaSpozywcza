@@ -22,7 +22,9 @@ namespace Interfaces
         IBaseRepository<UzytkownikUprawnienie> UzytkownicyUprawnienia { get; }
         IBaseRepository<Zamowienie> Zamowienia { get; }
         IBaseRepository<ZamowieniePozycja> ZamowieniaPozycje { get; }
+        void Dispose();
         void Commit();
+        Task CommitAsync();
         bool HasChanges();
     }
 }

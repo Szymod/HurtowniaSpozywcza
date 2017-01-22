@@ -3,6 +3,10 @@
     padding-bottom: 20px;
 }
 
+.container{
+        width:85%;
+    }
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -14,4 +18,12 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+input.input-validation-error,
+select.input-validation-error {
+    border-color: #a94442;
+    background:#ffeeee;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.07
 }

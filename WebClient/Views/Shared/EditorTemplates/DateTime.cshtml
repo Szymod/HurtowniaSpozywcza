@@ -1,0 +1,15 @@
+﻿@model DateTime?
+
+@Html.TextBox("", Model.HasValue ? Model.Value.ToString("d") : String.Empty, new { @class = "form-control" })
+
+<script type="text/javascript">
+    $(function () {
+        $('#@Html.IdForModel()').datepicker({
+            autoclose: true,
+            language: 'pl',
+            format: 'yyyy-mm-dd'
+            
+        });
+    });
+</script>
+

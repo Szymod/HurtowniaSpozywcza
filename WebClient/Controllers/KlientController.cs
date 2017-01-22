@@ -10,122 +10,173 @@ using System.Web.Mvc;
 using DataAccess;
 using Model.DomainModel;
 using WebClient.Models;
+using Microsoft.Practices.Unity;
+using Interfaces;
 
 namespace WebClient.Controllers
 {
     public class KlientController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        [Dependency]
+        public IUnitOfWork UnitOfWork { get; set; }
 
-        // GET: Klient
+        [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var klienci = db.Klienci.Include(k => k.Adres).Select(k=>new KlientListaViewModel()
+            var klienci = UnitOfWork.Klienci.GetAll().Select(d => new KlientListaViewModel()
             {
-                Id = k.Id,
-                Nazwa = k.Nazwa,
-                Telefon = k.Telefon,
-                Adres = k.Adres == null ? "" : k.Adres.KodPocztowy.Kod + " " + k.Adres.Miasto.Nazwa + ", " + k.Adres.Ulica.Nazwa + " " + k.Adres.NumerDomu
+                Id = d.Id,
+                Nazwa = d.Nazwa,
+                Telefon = d.Telefon,
+                Adres = d.Adres == null ? "" : d.Adres.KodPocztowy.Kod + " " + d.Adres.Miasto.Nazwa + ", " + d.Adres.Ulica.Nazwa + " " + d.Adres.NumerDomu
             });
             return View(await klienci.ToListAsync());
         }
 
-        // GET: Klient/Details/5
+        [HttpGet]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Klient klient = await db.Klienci.FindAsync(id);
+
+            Klient klient = await Task.FromResult(UnitOfWork.Klienci.GetById(id.Value));
+
             if (klient == null)
             {
                 return HttpNotFound();
             }
-            return View(klient);
+
+            var model = new KlientViewModel()
+            {
+                Id = klient.Id,
+                Nazwa = klient.Nazwa,
+                Telefon = klient.Telefon,
+                Adres = new AdresViewModel()
+                {
+                    Id = klient.Adres.Id,
+                    KodPocztowyId = klient.Adres.KodPocztowyId,
+                    KodPocztowy = klient.Adres.KodPocztowy.Kod,
+                    MiastoId = klient.Adres.MiastoId,
+                    Miasto = klient.Adres.Miasto.Nazwa,
+                    UlicaId = klient.Adres.UlicaId,
+                    Ulica = klient.Adres.Ulica.Nazwa,
+                    NumerDomu = klient.Adres.NumerDomu,
+                    NumerLokalu = klient.Adres.NumerLokalu,
+                }
+            };
+
+            return View(model);
         }
 
-        // GET: Klient/Create
+        [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.AdresId = new SelectList(db.Adresy, "Id", "NumerDomu");
             return View();
         }
 
-        // POST: Klient/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Nazwa")] KlientViewModel klient)
+        public async Task<ActionResult> Create(KlientViewModel klient)
         {
             if (ModelState.IsValid)
             {
-                //db.Klienci.Add(klient);
-                await db.SaveChangesAsync();
+                var kodPocztowy = new KodPocztowy() { Kod = klient.Adres.KodPocztowy };
+                var miasto = new Miasto() { Nazwa = klient.Adres.Miasto, KodPocztowy = kodPocztowy };
+                var ulica = new Ulica() { Nazwa = klient.Adres.Ulica, Miasto = miasto };
+                var domainModel = new Klient()
+                {
+                    Nazwa = klient.Nazwa,
+                    Adres = new Adres()
+                    {
+                        KodPocztowy = kodPocztowy,
+                        Miasto = miasto,
+                        Ulica = ulica,
+                        NumerDomu = klient.Adres.NumerDomu,
+                        NumerLokalu = klient.Adres.NumerLokalu
+                    },
+                    Telefon = klient.Telefon
+                };
+
+                UnitOfWork.Klienci.Add(domainModel);
+                await UnitOfWork.CommitAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AdresId = new SelectList(db.Adresy, "Id", "NumerDomu", klient.AdresId);
             return View(klient);
         }
 
-        // GET: Klient/Edit/5
+        [HttpGet]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Klient klient = await db.Klienci.FindAsync(id);
+
+            Klient klient = await Task.FromResult(UnitOfWork.Klienci.GetById(id.Value));
+
             if (klient == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AdresId = new SelectList(db.Adresy, "Id", "NumerDomu", klient.AdresId);
-            return View(klient);
+
+            var model = new KlientViewModel()
+            {
+                Id = klient.Id,
+                Nazwa = klient.Nazwa,
+                Telefon = klient.Telefon,
+                Adres = new AdresViewModel()
+                {
+                    Id = klient.Adres.Id,
+                    KodPocztowyId = klient.Adres.KodPocztowyId,
+                    KodPocztowy = klient.Adres.KodPocztowy.Kod,
+                    MiastoId = klient.Adres.MiastoId,
+                    Miasto = klient.Adres.Miasto.Nazwa,
+                    UlicaId = klient.Adres.UlicaId,
+                    Ulica = klient.Adres.Ulica.Nazwa,
+                    NumerDomu = klient.Adres.NumerDomu,
+                    NumerLokalu = klient.Adres.NumerLokalu,
+                }
+            };
+
+            return View(model);
         }
 
-        // POST: Klient/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Nazwa,AdresId")] Klient klient)
+        public async Task<ActionResult> Edit(KlientViewModel klient)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(klient).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                var domainModel = UnitOfWork.Klienci.GetById(klient.Id);
+
+                domainModel.Nazwa = klient.Nazwa;
+                domainModel.Adres.KodPocztowy.Kod = klient.Adres.KodPocztowy;
+                domainModel.Adres.Miasto.Nazwa = klient.Adres.Miasto;
+                domainModel.Adres.NumerDomu = klient.Adres.NumerDomu;
+                domainModel.Adres.NumerLokalu = klient.Adres.NumerLokalu;
+                domainModel.Adres.Ulica.Nazwa = klient.Adres.Ulica;
+                domainModel.Telefon = klient.Telefon;
+
+                UnitOfWork.Klienci.Update(domainModel);
+                await UnitOfWork.CommitAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.AdresId = new SelectList(db.Adresy, "Id", "NumerDomu", klient.AdresId);
+
             return View(klient);
         }
 
-        // GET: Klient/Delete/5
+        [HttpGet]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Klient klient = await db.Klienci.FindAsync(id);
-            if (klient == null)
-            {
-                return HttpNotFound();
-            }
-            return View(klient);
-        }
 
-        // POST: Klient/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            Klient klient = await db.Klienci.FindAsync(id);
-            db.Klienci.Remove(klient);
-            await db.SaveChangesAsync();
+            UnitOfWork.Klienci.Delete(id.Value);
+            await UnitOfWork.CommitAsync();
+
             return RedirectToAction("Index");
         }
 
@@ -133,7 +184,7 @@ namespace WebClient.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                UnitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

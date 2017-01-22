@@ -16,7 +16,7 @@ namespace Model.DomainModel
         public int Id { get; set; }
 
         public int KlientId { get; set; }
-        public Klient Klient { get; set; }
+        public virtual Klient Klient { get; set; }
 
         public DateTime DataZlozeniaZamowienia { get; set; }
         public bool CzyPrzyjetoZamowienie { get; set; }
@@ -26,7 +26,7 @@ namespace Model.DomainModel
         public bool CzyZrealizowanoZamowienie { get; set; }
         public DateTime? DataRealizacjiZamowienia { get; set; }
 
-        public FakturaSprzedazy Faktura { get; set; }
+        public virtual FakturaSprzedazy Faktura { get; set; }
 
         public virtual ICollection<ZamowieniePozycja> Pozycje { get; set; }
     }

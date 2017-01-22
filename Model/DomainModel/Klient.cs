@@ -18,7 +18,7 @@ namespace Model.DomainModel
         public string Nazwa { get; set; }
         public string Telefon { get; set; }
         public int AdresId { get; set; }
-        public Adres Adres { get; set; }
+        public virtual Adres Adres { get; set; }
 
         public virtual ICollection<Zamowienie> Zamowienia { get; set; }
         public virtual ICollection<FakturaSprzedazy> Faktury { get; set; }

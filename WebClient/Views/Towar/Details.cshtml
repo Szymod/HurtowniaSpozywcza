@@ -1,0 +1,67 @@
+﻿@using WebClient.Models
+@model TowarViewModel
+
+@{
+    ViewBag.Title = "Szczegóły";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Towar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DostawcaId)
+        </dt>
+
+        <dd>
+           @ViewBag.Dostawca
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StanMagazynowy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StanMagazynowy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wycofany)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wycofany)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Powrót do listy", "Index")
+</p>

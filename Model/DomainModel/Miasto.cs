@@ -17,7 +17,7 @@ namespace Model.DomainModel
         public int Id { get; set; }
 
         public int KodPocztowyId { get; set; }
-        public KodPocztowy KodPocztowy { get; set; }
+        public virtual KodPocztowy KodPocztowy { get; set; }
 
         public string Nazwa { get; set; }
 

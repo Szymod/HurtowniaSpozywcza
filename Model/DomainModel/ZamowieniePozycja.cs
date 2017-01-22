@@ -10,9 +10,9 @@ namespace Model.DomainModel
     {
         public int Id { get; set; }
         public int ZamowienieId { get; set; }
-        public Zamowienie Zamowienie { get; set; }
+        public virtual Zamowienie Zamowienie { get; set; }
         public int TowarId { get; set; }
-        public Towar Towar { get; set; }
+        public virtual Towar Towar { get; set; }
         public int Ilosc { get; set; }
     }
 }

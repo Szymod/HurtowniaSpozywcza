@@ -8,14 +8,14 @@ namespace WebClient.Models
 {
     public class AdresViewModel
     {
-        public int Id { get; set; }
-        public int KodPocztowyId { get; set; }
+        public int? Id { get; set; }
+        public int? KodPocztowyId { get; set; }
         [DisplayName("Kod pocztowy")]
         public string KodPocztowy { get; set; }
-        public int MiastoId { get; set; }
+        public int? MiastoId { get; set; }
         [DisplayName("Miasto")]
         public string Miasto { get; set; }
-        public int UlicaId { get; set; }
+        public int? UlicaId { get; set; }
         [DisplayName("Ulica")]
         public string Ulica { get; set; }
         [DisplayName("Numer domu")]

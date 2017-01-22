@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm()) 
 {
-    @Html.AntiForgeryToken()
+    
     
     <div class="form-horizontal">
         <hr />
@@ -26,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DostawcaId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("DostawcaId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.DostawcaId, ViewBag.Dostawcy as SelectList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DostawcaId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -78,5 +78,5 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    
 }

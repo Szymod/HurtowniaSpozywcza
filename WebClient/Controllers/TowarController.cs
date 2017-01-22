@@ -10,19 +10,20 @@ using System.Web.Mvc;
 using DataAccess;
 using Model.DomainModel;
 using WebClient.Models;
+using Microsoft.Practices.Unity;
+using Interfaces;
 
 namespace WebClient.Controllers
 {
     public class TowarController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        [Dependency]
+        public IUnitOfWork UnitOfWork { get; set; }
 
-        // GET: Towar
+        [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var towary = db.Towary;
-
-            var model = towary.Select(x => new TowarListaViewModel()
+            var towary = UnitOfWork.Towary.GetAll().Select(x => new TowarListaViewModel()
             {
                 Id = x.Id,
                 Nazwa = x.Nazwa,
@@ -33,80 +34,145 @@ namespace WebClient.Controllers
                 Wycofany = x.Wycofany
             });
 
-            return View(await model.ToListAsync());
+            return View(await towary.ToListAsync());
         }
 
-        // GET: Towar/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public async Task<ActionResult> Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+          
+            Towar towar = await Task.FromResult(UnitOfWork.Towary.GetById(id.Value));
+
+            if (towar == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = new TowarViewModel()
+            {
+                Id = towar.Id,
+                Nazwa = towar.Nazwa,
+                DostawcaId = towar.DostawcaId,
+                Cena = towar.Cena,
+                Vat = towar.Vat,
+                StanMagazynowy = towar.StanMagazynowy,
+                Wycofany = towar.Wycofany
+            };
+
+            ViewBag.Dostawca = UnitOfWork.Dostawcy.GetById(towar.DostawcaId).Nazwa;
+            return View(model);
         }
 
-        // GET: Towar/Create
+        [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.DostawcaId = new SelectList(db.Dostawcy, "Id", "Nazwa");
+            ViewBag.Dostawcy = new SelectList(UnitOfWork.Dostawcy.GetAll(), "Id", "Nazwa");
             return View();
         }
 
-        // POST: Towar/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(TowarViewModel towar)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                var domainModel = new Towar()
+                {
+                    Nazwa = towar.Nazwa,
+                    DostawcaId = towar.DostawcaId,
+                    Cena = towar.Cena,
+                    Vat = towar.Vat,
+                    StanMagazynowy = towar.StanMagazynowy,
+                    Wycofany = towar.Wycofany
+                };
 
+                UnitOfWork.Towary.Add(domainModel);
+                await UnitOfWork.CommitAsync();
                 return RedirectToAction("Index");
             }
-            catch
+
+            ViewBag.Dostawcy = new SelectList(UnitOfWork.Dostawcy.GetAll(), "Id", "Nazwa");
+            return View(towar);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-        }
 
-        // GET: Towar/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+            ViewBag.Dostawcy = new SelectList(UnitOfWork.Dostawcy.GetAll(), "Id", "Nazwa");
+            Towar towar = await Task.FromResult(UnitOfWork.Towary.GetById(id.Value));
 
-        // POST: Towar/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
+            if (towar == null)
             {
-                // TODO: Add update logic here
+                return HttpNotFound();
+            }
 
+            var model = new TowarViewModel()
+            {
+                Id = towar.Id,
+                Nazwa = towar.Nazwa,
+                DostawcaId = towar.DostawcaId,
+                Cena = towar.Cena,
+                Vat = towar.Vat,
+                StanMagazynowy = towar.StanMagazynowy,
+                Wycofany = towar.Wycofany
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(TowarViewModel towar)
+        {
+            if (ModelState.IsValid)
+            {
+                var domainModel = UnitOfWork.Towary.GetById(towar.Id);
+
+                domainModel.Nazwa = towar.Nazwa;
+                domainModel.DostawcaId = towar.DostawcaId;
+                domainModel.Cena = towar.Cena;
+                domainModel.Vat = towar.Vat;
+                domainModel.StanMagazynowy = towar.StanMagazynowy;
+                domainModel.Wycofany = towar.Wycofany;
+
+                UnitOfWork.Towary.Update(domainModel);
+                await UnitOfWork.CommitAsync();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            ViewBag.Dostawcy = new SelectList(UnitOfWork.Dostawcy.GetAll(), "Id", "Nazwa");
+            return View(towar);
         }
 
-        // GET: Towar/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public async Task<ActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            UnitOfWork.Towary.Delete(id.Value);
+            await UnitOfWork.CommitAsync();
+
+            return RedirectToAction("Index");
         }
 
-        // POST: Towar/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        protected override void Dispose(bool disposing)
         {
-            try
+            if (disposing)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                UnitOfWork.Dispose();
             }
-            catch
-            {
-                return View();
-            }
+            base.Dispose(disposing);
         }
+
     }
 }

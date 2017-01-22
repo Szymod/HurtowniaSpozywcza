@@ -16,7 +16,7 @@ namespace Model.DomainModel
         public int Id { get; set; }
 
         public int MiastoId { get; set; }
-        public Miasto Miasto { get; set; }
+        public virtual Miasto Miasto { get; set; }
 
         public string Nazwa { get; set; }
 

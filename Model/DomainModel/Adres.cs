@@ -17,13 +17,18 @@ namespace Model.DomainModel
         public int Id { get; set; }
 
         public int KodPocztowyId { get; set; }
-        public KodPocztowy KodPocztowy { get; set; }
+        public virtual KodPocztowy KodPocztowy { get; set; }
         public int MiastoId { get; set; }
-        public Miasto Miasto { get; set; }
+        public virtual Miasto Miasto { get; set; }
         public int UlicaId { get; set; }
-        public Ulica Ulica { get; set; }
+        public virtual Ulica Ulica { get; set; }
         public string NumerDomu { get; set; }
         public string NumerLokalu { get; set; }
+
+        public override string ToString()
+        {
+            return Ulica.Nazwa + " " + NumerDomu + ", " + KodPocztowy.Kod + " " + Miasto.Nazwa;
+        }
 
         public virtual ICollection<Dostawca> Dostawcy { get; set; }
         public virtual ICollection<Klient> Klienci { get; set; }

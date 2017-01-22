@@ -12,7 +12,16 @@ namespace WebClient
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/globalize.js",
+                        "~/Scripts/globalize/currency.js",
+                        "~/Scripts/globalize/date.js",
+                        "~/Scripts/globalize/message.js",
+                        "~/Scripts/globalize/number.js",
+                        "~/Scripts/globalize/plural.js",
+                        "~/Scripts/globalize/relative-time.js",
+                        "~/Scripts/globalize/unit.js"
+                        ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -21,10 +30,13 @@ namespace WebClient
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-datepicker.js",
+                      "~/Scripts/locales/bootstrap-datepicker.pl.min.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-datepicker3.css",
                       "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,

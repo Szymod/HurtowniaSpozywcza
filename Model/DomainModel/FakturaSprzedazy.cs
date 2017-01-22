@@ -14,9 +14,9 @@ namespace Model.DomainModel
         }
 
         public int Id { get; set; }
-        public Zamowienie Zamowienie { get; set; }
+        public virtual Zamowienie Zamowienie { get; set; }
         public int KlientId { get; set; }
-        public Klient Klient { get; set; }
+        public virtual Klient Klient { get; set; }
         public string NumerFaktury { get; set; }
         public DateTime DataSprzedazy { get; set; }
         public DateTime DataWystawienia { get; set; }

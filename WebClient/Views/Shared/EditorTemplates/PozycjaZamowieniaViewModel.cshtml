@@ -1,0 +1,30 @@
+﻿@using WebClient.Models
+@model PozycjaZamowieniaViewModel
+
+<tr id="@Model.GetHashCode()" role="row">
+    <td>
+        @Html.HiddenFor(model => model.Id)
+        @Html.DropDownListFor(model => model.TowarId, ViewBag.Towary as SelectList, "-- Wybierz towar --", new { @class = "form-control" })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.Ilosc, new { htmlAttributes = new { @class = "form-control", min = 1 } })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.TowarCena, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.TowarVat, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.Netto, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.Vat, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.Brutto, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+    </td>
+    <td style="vertical-align: middle;">
+        <button type="button" class="close" data-dismiss="row" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </td>
+</tr>
