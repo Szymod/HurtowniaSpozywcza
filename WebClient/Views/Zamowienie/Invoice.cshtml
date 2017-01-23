@@ -11,17 +11,13 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Faktura sprzedaży</title>
-    <style>
-        html{
-            font-family:Arial;
-        }
-    </style>
+    @Styles.Render("~/Content/css")
 </head>
 <body>
 
     <p align="right" style="padding-right: 10px;">
         <strong style="font-size:22px;"> FAKTURA VAT</strong><br />
-        Nr. <i style="font-size:18px;"> @Html.DisplayFor(model => model.NumerFaktury)</i><br />
+        <strong style="font-size:18px;"> @Html.DisplayFor(model => model.NumerFaktury) </strong> <br />
         <br />
         Data sprzedaży: @Html.DisplayFor(model => model.DataSprzedazy)<br />
         Data wystawienia: @Html.DisplayFor(model => model.DataWystawienia)<br />
@@ -29,13 +25,14 @@
 
    <table style="border-spacing: 10px; width:100%;">
        <tr>
-           <td width="50%;">
+           <td width="48%;">
                <h4 style="padding:0px; margin:0px;"> SPRZEDAWCA</h4> <hr />
                Hurtownia spożywcza <br />
                Warszawska 2, 94-222 Marki
                
            </td>
-           <td width="50%;">
+           <td width="4%"></td>
+           <td width="48%;">
                <h4 style="padding:0px; margin:0px;"> NABYWCA </h4> <hr />
                @Html.DisplayFor(model => model.Klient) <br />
                @Html.DisplayFor(model => model.KlientAdres) 
@@ -43,8 +40,8 @@
        </tr>
    </table>
     <br />
-    <table style="border-spacing: 10px; width:100%;">
-        <caption>Pozycje faktury</caption>
+    <table class="table">
+        <caption style="text-align:center;">Pozycje faktury</caption>
         <thead>
             <tr>
                 <th>@Html.DisplayNameFor(model => model.Pozycje[0].Towar)</th>

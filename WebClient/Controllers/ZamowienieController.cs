@@ -12,12 +12,8 @@ using Model.DomainModel;
 using WebClient.Models;
 using Microsoft.Practices.Unity;
 using Interfaces;
-using MvcRazorToPdf;
-using iTextSharp.text;
-using iTextSharp.text.html.simpleparser;
-using iTextSharp.text.html;
 using System.IO;
-using iTextSharp.text.pdf;
+using Rotativa;
 
 namespace WebClient.Controllers
 {
@@ -356,12 +352,7 @@ namespace WebClient.Controllers
                 }).ToList()
             };
 
-            return new PdfActionResult("Invoice", model, (writer, document) => 
-            {
-                FontFactory.Register(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "Arial.TTF"));
-                document.NewPage(); 
-            
-            });
+            return new ViewAsPdf("Invoice", model);
         }
 
         protected override void Dispose(bool disposing)
